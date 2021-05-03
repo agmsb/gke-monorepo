@@ -18,15 +18,16 @@ deploy:
   kustomize:
     paths:
     - https://github.com/agmsb/k8s-golden-manifests/gke-monorepo/frontend/resources
-# profiles:
-# - name: prod
-#   deploy:
-#     kustomize:
-#       paths:
-#       - k8s/prod
-# portForward:
-#   - resourceType: service
-#     resourceName: gceme-frontend
-#     namespace: default
-#     port: 80
-#     localPort: 8080
+profiles:
+- name: pre-production
+  portForward:
+    - resourceType: service
+      resourceName: gke-monorepo-frontend
+      namespace: default
+      port: 80
+      localPort: 8080
+- name: production
+  deploy:
+    kustomize:
+      paths:
+      - https://github.com/agmsb/k8s-golden-manifests/gke-monorepo/frontend/overlays/prod

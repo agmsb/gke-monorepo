@@ -21,7 +21,7 @@ var backend string
 func main() {
 
 	port := ":8080"
-	backend = *flag.String("backend-service", "http://gke-monorepo-backend:80", "hostname of backend server")
+	backend = *flag.String("backend-service", "http://gke-monorepo-backend:8080", "hostname of backend server")
 	flag.Parse()
 
 	log.Printf("Frontend version: %s\n", version)
@@ -79,6 +79,7 @@ func handleIndex(c *gin.Context) {
 		return
 	}
 	var p PodMetadata
+	log.Println(p)
 	err = json.Unmarshal([]byte(body), &p)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Unable to parse JSON from backend request:\n%v", err)
