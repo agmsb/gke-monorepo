@@ -1,9 +1,0 @@
-apiVersion: skaffold/v2beta13
-kind: Config
-metadata:
-  name: full-stack
-requires:
-- path: apps/frontend
-- path: apps/backend
-- path: infrastructure/containers/base-image
-- path: infrastructure/policy
