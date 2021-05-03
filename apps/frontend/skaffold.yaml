@@ -1,0 +1,32 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: frontend
+requires:
+  - path: ../backend
+  - path: ../../infrastructure/containers/base-image
+#   - path: ../../infrastructure/containers/policy
+build:
+  artifacts:
+  - image: gcr.io/agmsb-k8s/gke-monorepo-frontend
+    # buildpacks:
+    #   builder: "gcr.io/buildpacks/builder:v1"
+    requires:
+      - alias: BASE
+        image: gcr.io/agmsb-k8s/go-base
+deploy:
+  kustomize:
+    paths:
+    - https://github.com/agmsb/k8s-golden-manifests/gke-monorepo/frontend/resources
+# profiles:
+# - name: prod
+#   deploy:
+#     kustomize:
+#       paths:
+#       - k8s/prod
+# portForward:
+#   - resourceType: service
+#     resourceName: gceme-frontend
+#     namespace: default
+#     port: 80
+#     localPort: 8080

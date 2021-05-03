@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+metadata:
+  name: backend
+requires:
+  - path: ../../infrastructure/containers/base-image
+build:
+  artifacts:
+  - image: gcr.io/agmsb-k8s/gke-monorepo-backend
+    requires:
+    - alias: BASE
+      image: gcr.io/agmsb-k8s/go-base
+deploy:
+  kustomize:
+    paths:
+    - k8s/overlays/prod

@@ -1,0 +1,7 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: go-base
+build:
+  artifacts:
+  - image: gcr.io/agmsb-k8s/go-base

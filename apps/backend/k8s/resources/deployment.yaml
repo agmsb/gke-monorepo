@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gke-monorepo-backend
+spec:
+  selector:
+    matchLabels:
+      app: gke-monorepo-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gke-monorepo-backend
+    spec:
+      containers:
+      - name: gke-monorepo-backend
+        image: gcr.io/agmsb-k8s/gke-monorepo-backend
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
