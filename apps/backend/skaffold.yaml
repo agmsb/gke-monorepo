@@ -13,4 +13,4 @@ build:
 deploy:
   kustomize:
     paths:
-    - k8s/overlays/prod
+    - ../../infrastructure/k8s/overlays/prod
